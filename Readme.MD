@@ -85,44 +85,42 @@ Let's dive deeper into the mathematical formulation and the key steps involved i
 
 ### Mathematical Formulation
 
-Suppose we have gene expression data from N samples, measuring the expression of p genes. Let each expression profile sample form a row of the matrix X (an N × p matrix). The samples belong to one of K classes, denoted by the set G.
+Suppose we have gene expression data from $N$ samples, measuring the expression of $p$ genes. Let each expression profile sample form a row of the matrix $X$ (an $N \times p$ matrix). The samples belong to one of $K$ classes, denoted by the set $G$.
 
-In linear discriminant analysis (LDA), the log-ratio of class posteriors P(G|X) is given by:
+In linear discriminant analysis (LDA), the log-ratio of class posteriors $P(G|X)$ is given by:
 
-log(Pr(G=k|X=x) / Pr(G=l|X=x)) = log(π_k / π_l) - (1/2)(μ_k - μ_l)^T Σ^(-1) (μ_k - μ_l) + x^T Σ^(-1) (μ_k - μ_l)
+$$\log\frac{Pr(G=k|X=x)}{Pr(G=l|X=x)} = \log\frac{\pi_k}{\pi_l} - \frac{1}{2}(\mu_k - \mu_l)^T\Sigma^{-1}(\mu_k - \mu_l) + x^T\Sigma^{-1}(\mu_k - \mu_l)$$
 
-where π_k is the prior probability of class k, μ_k is the mean of class k, and Σ is the covariance matrix (assumed to be the same for all classes).
+where $\pi_k$ is the prior probability of class $k$, $\mu_k$ is the mean of class $k$, and $\Sigma$ is the covariance matrix (assumed to be the same for all classes).
 
-The orientation of the separating hyper-plane between classes k and l is defined by the normal p-vector b, given by:
+The orientation of the separating hyper-plane between classes $k$ and $l$ is defined by the normal $p$-vector $b$, given by:
 
-b = Σ^(-1) (μ_k - μ_l)
+$$b = \Sigma^{-1}(\mu_k - \mu_l)$$
 
-The direction of the p-vector b represents the direction in the expression space that best characterizes the differential expression between the classes.
+The direction of the $p$-vector $b$ represents the direction in the expression space that best characterizes the differential expression between the classes.
 
 ### Key Steps
 
 1. **Computing class means and covariance matrix:**
-   - Calculate the class means μ_k and μ_l from the gene expression data for each class.
-   - Estimate the covariance matrix Σ from the data.
+   - Calculate the class means $\mu_k$ and $\mu_l$ from the gene expression data for each class.
+   - Estimate the covariance matrix $\Sigma$ from the data.
 
 2. **Estimating the separating hyper-plane orientation:**
-   - Compute the orientation of the separating hyper-plane b using the class means and the inverse of the covariance matrix, as shown in the equation above.
+   - Compute the orientation of the separating hyper-plane $b$ using the class means and the inverse of the covariance matrix, as shown in the equation above.
 
 3. **Applying regularization techniques:**
-   - Address the singularity and high variance issues that arise when estimating the covariance matrix from limited samples (p >> N).
-   - Apply regularization techniques, such as shrinkage, to stabilize the covariance matrix estimation. For example, the covariance matrix can be shrunk towards the scalar variance:
-     Σ^(γ) = γΣ^ + (1-γ)σ^2 I_p, with γ ∈ [0, 1]
-     where Σ^ is the estimated covariance matrix, σ^2 is the scalar covariance, and I_p is the identity matrix of size p.
+   - Address the singularity and high variance issues that arise when estimating the covariance matrix from limited samples ($p >> N$).
+   - Apply regularization techniques, such as shrinkage, to stabilize the covariance matrix estimation. For example, the covariance matrix can be shrunk towards the scalar variance: $$\hat{\Sigma}(\gamma) = \gamma\hat{\Sigma} + (1-\gamma)\sigma^2I_p, \quad \text{with } \gamma \in [0, 1]$$ where $\hat{\Sigma}$ is the estimated covariance matrix, $\sigma^2$ is the scalar covariance, and $I_p$ is the identity matrix of size $p$.
    - The inclusion of a constant on the diagonal resolves the singularity problem, and the modulation of the off-diagonal terms helps to reduce noise.
 
 4. **Interpreting the components of the normalized vector b:**
-   - Normalize the vector b to obtain b^, which contains information about the direction of the normal to the separating hyper-plane.
-   - The components of b^ are the direction cosines, and their magnitude quantifies the degree of alignment of the direction to the axes corresponding to each gene.
+   - Normalize the vector $b$ to obtain $\hat{b}$, which contains information about the direction of the normal to the separating hyper-plane.
+   - The components of $\hat{b}$ are the direction cosines, and their magnitude quantifies the degree of alignment of the direction to the axes corresponding to each gene.
    - The sign of each component can be interpreted as the sign of the contribution of each gene to the differential expression.
-   - The contribution of each b^_i^2 to the sum ∑_(i=1)^p b^_i^2 ≡ 1 can be interpreted as quantifying the relative contribution of each component to the total differential expression, indicating the significance of the corresponding gene.
+   - The contribution of each $\hat{b}i^2$ to the sum $\sum{i=1}^p \hat{b}_i^2 \equiv 1$ can be interpreted as quantifying the relative contribution of each component to the total differential expression, indicating the significance of the corresponding gene.
 
 5. **Ranking and identifying significant DEGs:**
-   - Use the relative contributions of each gene (based on the components of b^) to rank the genes in order of their significance to the differential expression.
+   - Use the relative contributions of each gene (based on the components of $\hat{b}$) to rank the genes in order of their significance to the differential expression.
    - Identify a shortlist of significant DEGs by applying a suitable threshold or regularization scheme, such as L1 regularization, which results in automatic feature selection by setting many components to zero.
 
 The CD method provides a quantitative measure of the relative significance of each gene to the differential expression, enabling the ranking and identification of DEGs. The geometric interpretation of the separating hyper-plane and its normal vector offers an intuitive understanding of the differential expression patterns between different biological conditions or classes.
@@ -192,7 +190,7 @@ Although my code does not explicitly display specific challenges, it is possible
 
 This cosine similarity matrix displays the similarities between the movement of drug-gene expression profiles and various kidney disease states. 
 
-![Drug-Disease Heatmap](https://ibb.co/XDPcqxf)
+![Drug-Disease Heatmap](DrugDiseaseCosineSimilarity.png)
 
 ### 5.1.1 Cosine Similarity Matrix
 
@@ -232,7 +230,7 @@ However, it is important to note that these findings are based on various and in
 
 The cosine similarity matrix drug-drug interaction delivers insights into the similarities between gene expression profiles of drugs tested on kidney tissue. We can identify drugs with similar effects on kidney gene expression and potential drug repurposing candidates by analyzing this matrix and the corresponding significance matrix.
 
-![Drug-Drug Heatmap]( https://ibb.co/v1P5G3j)
+![Drug-Drug Heatmap](DrugCosineSImilarityHeatmap.png)
 
 ### 5.2.1 Cosine Similarity Matrix
 
