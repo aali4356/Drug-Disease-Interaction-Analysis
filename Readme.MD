@@ -166,7 +166,7 @@ The CD method was implemented in Python using the `chdir` function, taken from t
 
 ## 4.1 Cosine Similarity and its Purpose
 
-Cosine similarity is a widely used measure between two non-zero vectors, calculated as the cosine of the angle between them. It ranges from -1 to 1, where 1 indicates high similarity, and -1 indicates dissimilarity (5). In my study, I utilized 1-cosine similarity, the complement of cosine similarity, ranging from 0 to 2, where 0 indicates high similarity and 2 indicates dissimilarity.
+Cosine similarity is a widely used measure between two non-zero vectors, calculated as the cosine of the angle between them. It ranges from -1 to 1, where 1 indicates high similarity, and -1 indicates dissimilarity (5).
 
 The choice of 1-cosine similarity was influenced by its effectiveness in capturing the similarity between high-dimensional gene expression profiles or document vectors, as demonstrated in previous studies on genetic interaction data [1]. Cosine similarity focuses on the angle between the vectors and is insensitive to their magnitude, making it suitable for comparing relative patterns of gene expression.
 
