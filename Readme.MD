@@ -166,9 +166,9 @@ The CD method was implemented in Python using the `chdir` function, taken from t
 
 ## 4.1 Cosine Similarity and its Purpose
 
-Cosine similarity is a widely used measure between two non-zero vectors, calculated as the cosine of the angle between them. It ranges from -1 to 1, where 1 indicates high similarity, and -1 indicates dissimilarity (5).
+Cosine similarity is a widely used measure between two non-zero vectors, calculated as the cosine of the angle between them. It ranges from -1 to 1, where 1 indicates high similarity, and 0 indicates dissimilarity (5).
 
-The choice of 1-cosine similarity was influenced by its effectiveness in capturing the similarity between high-dimensional gene expression profiles or document vectors, as demonstrated in previous studies on genetic interaction data [1]. Cosine similarity focuses on the angle between the vectors and is insensitive to their magnitude, making it suitable for comparing relative patterns of gene expression.
+The choice of 1-cosine similarity was influenced by its effectiveness in capturing the similarity between high-dimensional gene expression profiles or document vectors, as demonstrated in previous studies on genetic interaction data (16). Cosine similarity focuses on the angle between the vectors and is insensitive to their magnitude, making it suitable for comparing relative patterns of gene expression.
 
 To calculate 1-cosine similarity, I utilized the `cosine()` function from the `lsa` library in R. First, I created a data matrix containing the gene signature values from the characteristic direction method for both drug and disease data. Then, I calculated the cosine similarity between each pair of columns (representing drugs and diseases) in the data matrix using nested loops. Finally, I subtracted the cosine similarity values from 1 to obtain the 1-cosine similarity.
 
@@ -313,4 +313,5 @@ The GitHub repository provides the processed datasets and the code used for data
 13.	Eid SA, Hinder LM, Zhang H, Eksi R, Nair V, Eddy S, et al. Gene expression profiles of diabetic kidney disease and neuropathy in eNOS knockout mice: Predictors of pathology and RAS blockade effects. FASEB J. 2021 May;35(5):e21467. 
 14.	Fu J, Wang Z, Lee K, Wei C, Liu Z, Zhang M, et al. Transcriptomic analysis uncovers novel synergistic mechanisms in combination therapy for lupus nephritis. Kidney International. 2018 Feb;93(2):416–29. 
 15.	Kohan DE, Barratt J, Heerspink HJL, Campbell KN, Camargo M, Ogbaa I, et al. Targeting the Endothelin A Receptor in IgA Nephropathy. Kidney International Reports. 2023 Nov;8(11):2198–210. 
+16.   Duan, Qiaonan et al. “L1000CDS2: LINCS L1000 characteristic direction signatures search engine.” NPJ systems biology and applications vol. 2 (2016): 16015–. doi:10.1038/npjsba.2016.15
 
